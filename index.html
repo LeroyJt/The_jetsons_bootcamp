@@ -1,100 +1,52 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Jetsons Bootcamp - Segurança Windows</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Jetsons Bootcamp - Home</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="ip.html">Consulta IP</a></li>
+      <li><a href="vpn.html">VPN</a></li>
+      <li><a href="tor.html">Tor</a></li>
+      <li><a href="hash.html">Hash Arquivo</a></li>
+      <li><a href="phishing.html">Phishing</a></li>
+    </ul>
+  </nav>
 
-<header>
-  <h1>The Jetsons Bootcamp</h1>
-  <p>Bem-vindo ao Bootcamp de Segurança - Windows Edition</p>
-</header>
+  <main>
+    <h1>Bem-vindo ao THE_JETSONS_BOOTCAMP</h1>
+    <p>
+      Este bootcamp foi criado para você aprender segurança cibernética básica no Windows, utilizando o CMD.
+      Comece se identificando com seu número de aluno (sem nomes). Depois siga para as atividades.
+    </p>
 
-<main>
-  <section id="introducao" class="page">
-    <h2>Introdução</h2>
-    <p>Este bootcamp vai te ensinar conceitos fundamentais de segurança usando o CMD do Windows. Você vai aprender a descobrir seu IP, usar VPN, identificar phishing e calcular hash de arquivos. Tudo passo a passo, para que você fique mais seguro no dia a dia.</p>
-    <p>Por favor, comece se identificando com seu número de aluno abaixo para prosseguir.</p>
-    <input type="text" id="alunoID" placeholder="Digite seu número de aluno" />
-    <button onclick="startBootcamp()">Começar</button>
-  </section>
+    <form id="loginForm">
+      <label for="alunoId">Número do aluno:</label>
+      <input type="number" id="alunoId" name="alunoId" min="1" required />
+      <button type="submit">Entrar</button>
+    </form>
 
-  <section id="atividade1" class="page hidden">
-    <h2>Atividade 1 - Descubra seu IP</h2>
-    <p>No CMD, digite: <code>ipconfig</code> e anote o IPv4.</p>
-    <textarea id="resposta1" placeholder="Digite aqui o seu IP"></textarea>
-    <button onclick="salvarResposta(1)">Salvar Resposta</button>
-    <button onclick="proximaAtividade(2)">Próximo</button>
-    <div class="dica">
-      <strong>Dica:</strong> O IPv4 geralmente começa com 192.168.x.x ou 10.x.x.x em redes locais.
-    </div>
-  </section>
+    <p id="welcomeMsg" style="display:none;"></p>
+  </main>
 
-  <section id="atividade2" class="page hidden">
-    <h2>Atividade 2 - IP com VPN Proton</h2>
-    <p>Ative o ProtonVPN no Windows e, no CMD, digite <code>ipconfig</code> novamente. Anote o novo IPv4 e compare com o anterior.</p>
-    <textarea id="resposta2" placeholder="Digite aqui o IP com VPN"></textarea>
-    <button onclick="salvarResposta(2)">Salvar Resposta</button>
-    <button onclick="proximaAtividade(3)">Próximo</button>
-    <div class="dica">
-      <strong>Dica:</strong> Se a VPN estiver funcionando, o IP deverá mudar para um diferente da sua rede local.
-    </div>
-  </section>
+  <script>
+    const form = document.getElementById('loginForm');
+    const welcomeMsg = document.getElementById('welcomeMsg');
 
-  <section id="atividade3" class="page hidden">
-    <h2>Atividade 3 - IP com Tor</h2>
-    <p>Utilize o Tor Browser ou o Tor via proxy configurado no Windows. No CMD, digite <code>curl https://check.torproject.org/api/ip</code> para verificar seu IP Tor (você precisa ter o curl instalado, pode usar o PowerShell).</p>
-    <textarea id="resposta3" placeholder="Digite aqui o IP que o Tor mostra"></textarea>
-    <button onclick="salvarResposta(3)">Salvar Resposta</button>
-    <button onclick="proximaAtividade(4)">Próximo</button>
-    <div class="dica">
-      <strong>Dica:</strong> O IP do Tor será diferente do IP da sua rede local e VPN.
-    </div>
-  </section>
-
-  <section id="atividade4" class="page hidden">
-    <h2>Atividade 4 - Hash de arquivo</h2>
-    <p>No CMD, calcule o hash SHA256 de um arquivo qualquer com o comando:</p>
-    <pre>CertUtil -hashfile caminho\para\arquivo SHA256</pre>
-    <p>Substitua <code>caminho\para\arquivo</code> pelo caminho real do arquivo. Cole o resultado aqui:</p>
-    <textarea id="resposta4" placeholder="Cole aqui o hash SHA256"></textarea>
-    <button onclick="salvarResposta(4)">Salvar Resposta</button>
-    <button onclick="proximaAtividade(5)">Próximo</button>
-    <div class="dica">
-      <strong>Dica:</strong> Use um arquivo pequeno para testar, como um .txt ou imagem.
-    </div>
-  </section>
-
-  <section id="atividade5" class="page hidden">
-    <h2>Atividade 5 - Phishing Simulado</h2>
-    <p>Receba um email falso simulando phishing. Na prática, você vai analisar o conteúdo para detectar sinais de golpe.</p>
-    <p><strong>Email exemplo:</strong></p>
-    <pre>
-De: suporte@paypa1.com
-Assunto: Urgente: Atualize sua conta!
-Mensagem: Clique no link para evitar bloqueio: http://paypa1-login.com/seguranca
-    </pre>
-    <p>Digite os indícios que mostram que esse email é phishing:</p>
-    <textarea id="resposta5" placeholder="Digite aqui os sinais de phishing"></textarea>
-    <button onclick="salvarResposta(5)">Salvar Resposta</button>
-    <button onclick="finalizarBootcamp()">Finalizar Bootcamp</button>
-    <div class="dica">
-      <strong>Dica:</strong> Observe o remetente, links estranhos e erros de ortografia.
-    </div>
-  </section>
-
-  <section id="final" class="page hidden">
-    <h2>Bootcamp Finalizado!</h2>
-    <p>Obrigado por participar. Suas respostas foram salvas localmente.</p>
-    <p>Você pode copiar o conteúdo das respostas abaixo e enviar para o instrutor:</p>
-    <pre id="respostasSalvas"></pre>
-  </section>
-</main>
-
-<script src="scripts.js"></script>
-
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const alunoId = document.getElementById('alunoId').value.trim();
+      if(alunoId) {
+        welcomeMsg.style.display = 'block';
+        welcomeMsg.textContent = `Olá, aluno #${alunoId}! Explore as atividades usando o menu acima.`;
+        form.style.display = 'none';
+      }
+    });
+  </script>
 </body>
 </html>
