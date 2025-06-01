@@ -1,51 +1,163 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>THE_JETSONS_BOOTCAMP</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE_JETSONS_BOOTCAMP</title>
+<style>
+  body {
+    background-color: #000000;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 20px;
+  }
+  h1, h2 {
+    border-bottom: 1px solid #00ff00;
+    padding-bottom: 5px;
+  }
+  .terminal {
+    background-color: #000000;
+    padding: 20px;
+    border: 1px solid #00ff00;
+    max-width: 800px;
+    margin: auto;
+  }
+  label {
+    display: block;
+    margin-top: 15px;
+  }
+  input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    background-color: #000000;
+    border: 1px solid #00ff00;
+    color: #00ff00;
+    font-family: monospace;
+    font-size: 1em;
+    padding: 8px;
+    margin-top: 5px;
+  }
+  button {
+    margin-top: 20px;
+    background-color: #00ff00;
+    color: #000000;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .dicas {
+    background-color: #003300;
+    padding: 10px;
+    margin-top: 20px;
+    font-style: italic;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="ascii-art">
-      _____ _   _ ______     _______ _____ ____  _   _  _____ ______  
-     |_   _| \ | |  ____|   |__   __|_   _/ __ \| \ | |/ ____|  ____| 
-       | | |  \| | |__ ______  | |    | || |  | |  \| | (___ | |__    
-       | | | . ` |  __|______| | |    | || |  | | . ` |\___ \|  __|   
-      _| |_| |\  | |____     | |   _| || |__| | |\  |____) | |____  
-     |_____|_| \_|______|    |_|  |_____\____/|_| \_|_____/|______| 
+  <div class="terminal">
+    <pre style="font-weight:bold; font-size: 1.2em;">
+ _______ _     _ _______ _______ _______ _______ _______
+ |_____| |____/  |______ |______ |______ |______ |______
+ |     | |    \_ |______ ______| |______ |______ |______
+
+     BEM-VINDO AO THE_JETSONS BOOTCAMP DE SEGURANÇA - WINDOWS EDITION
+
+    Aqui você irá aprender, passo a passo, como proteger sua
+    privacidade e entender conceitos básicos de segurança.
+    Prepare-se para realizar atividades práticas diretamente no CMD,
+    entender seus IPs e conexões, usar VPN e Tor, extrair hashes e
+    identificar phishing com atenção e cuidado.
+
+    Complete as etapas, preencha os campos abaixo e salve seu progresso
+    para que o instrutor possa avaliar seu aprendizado.
+
+    Use as dicas para descobrir quais comandos executar no Prompt de Comando.
+    </pre>
+
+    <form id="bootcampForm">
+      <label for="userId">1. Identifique-se (use seu número de matrícula ou ID):</label>
+      <input type="text" id="userId" name="userId" placeholder="Ex: 2025001234" required />
+
+      <label for="email">2. Insira seu e-mail para contato (exemplo: aluno@exemplo.com):</label>
+      <input type="email" id="email" name="email" placeholder="aluno@exemplo.com" required />
+
+      <label for="ipNormal">3. Primeiro, descubra o IP atual da sua máquina sem VPN:</label>
+      <input type="text" id="ipNormal" name="ipNormal" placeholder="Digite o endereço IPv4 exibido no CMD" required />
+
+      <label for="ipVpn">4. Agora, conecte sua VPN e descubra o novo IP:</label>
+      <input type="text" id="ipVpn" name="ipVpn" placeholder="Digite o endereço IPv4 após conexão VPN" required />
+
+      <label for="ipTor">5. Por fim, conecte-se via Tor e descubra o IP:</label>
+      <input type="text" id="ipTor" name="ipTor" placeholder="Digite o endereço IPv4 exibido usando Tor" required />
+
+      <label for="hashDoc">6. Extraia o hash SHA256 de um arquivo de texto qualquer no CMD e cole aqui:</label>
+      <input type="text" id="hashDoc" name="hashDoc" placeholder="Digite o hash SHA256 do arquivo" required />
+
+      <label for="phishingDetect">7. Detecte um possível phishing nesta mensagem e explique o que te chamou atenção:</label>
+      <textarea id="phishingDetect" name="phishingDetect" rows="4" placeholder="Descreva os sinais que indicam phishing..." required></textarea>
+
+      <button type="submit">Salvar Atividade</button>
+    </form>
+
+    <div class="dicas">
+      <strong>Dicas para usar o Prompt de Comando (CMD):</strong>
+      <ul>
+        <li>Para descobrir o IP da sua máquina, pense em um comando que começa com <em>ip</em> e termina com <em>config</em>.</li>
+        <li>Após ativar sua VPN, use o mesmo comando para notar a diferença no endereço IP.</li>
+        <li>Para saber o IP via Tor, conecte ao Tor e rode o mesmo comando anterior para conferir.</li>
+        <li>Quer extrair o hash SHA256 de um arquivo? Pense em um comando do Windows que calcula hashes e precisa do caminho do arquivo.</li>
+        <li>Para identificar phishing, observe sempre links estranhos, erros ortográficos e solicitações urgentes.</li>
+      </ul>
     </div>
 
-    <h1>THE_JETSONS_BOOTCAMP</h1>
-    <p>Bem-vindo ao Bootcamp de Segurança - Windows Edition.</p>
-    <p>Complete as atividades abaixo usando apenas o <strong>Prompt de Comando (CMD)</strong>. Não use PowerShell.</p>
-
-    <label for="userId">1. Informe seu número de identificação:</label>
-    <input type="text" id="userId" placeholder="Seu número aqui" />
-
-    <label for="ipNormal">2. Consulte seu IP normal (sem VPN/Tor):</label>
-    <input type="text" id="ipNormal" placeholder="Exemplo: 192.168.1.100" />
-
-    <label for="ipVpn">3. Consulte seu IP com VPN ativada:</label>
-    <input type="text" id="ipVpn" placeholder="Exemplo: 10.8.0.5" />
-
-    <label for="ipTor">4. Consulte seu IP com Tor ativado:</label>
-    <input type="text" id="ipTor" placeholder="Exemplo: 185.220.101.1" />
-
-    <label for="hashFile">5. Extraia o hash SHA256 de um arquivo via CMD (caminho + hash):</label>
-    <input type="text" id="hashFile" placeholder="Exemplo: arquivo.txt - 9c4a0b..." />
-
-    <label for="phishingDetect">6. Detecte phishing no e-mail abaixo e descreva:</label>
-    <textarea id="phishingDetect" rows="5" placeholder="Descreva o que você encontrou"></textarea>
-
-    <button id="saveBtn">Salvar respostas em TXT</button>
-
-    <footer>
-      <p>Use comandos no prompt CMD para cada tarefa. Não utilize PowerShell.</p>
-    </footer>
+    <pre id="saveResult" style="margin-top: 20px; border: 1px solid #00ff00; padding: 10px; white-space: pre-wrap;"></pre>
   </div>
 
-  <script src="script.js"></script>
+<script>
+  const form = document.getElementById('bootcampForm');
+  const saveResult = document.getElementById('saveResult');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const data = {
+      ID: form.userId.value.trim(),
+      Email: form.email.value.trim(),
+      IP_Sem_VPN: form.ipNormal.value.trim(),
+      IP_Com_VPN: form.ipVpn.value.trim(),
+      IP_Com_TOR: form.ipTor.value.trim(),
+      Hash_SHA256: form.hashDoc.value.trim(),
+      Detect_Pishing: form.phishingDetect.value.trim(),
+      Data: new Date().toLocaleString()
+    };
+
+    // Formata o texto a ser salvo
+    const output = `
+===== THE_JETSONS BOOTCAMP - RESULTADO DE ATIVIDADES =====
+Data: ${data.Data}
+
+1. ID do aluno: ${data.ID}
+2. E-mail: ${data.Email}
+
+3. IP da máquina sem VPN: ${data.IP_Sem_VPN}
+4. IP após conexão VPN: ${data.IP_Com_VPN}
+5. IP ao usar Tor: ${data.IP_Com_TOR}
+
+6. Hash SHA256 do arquivo: ${data.Hash_SHA256}
+
+7. Detecção de phishing:
+${data.Detect_Pishing}
+
+==========================================================`;
+
+    // Exibe o texto na tela para o instrutor copiar
+    saveResult.textContent = output;
+
+    alert('Atividade salva! Copie o texto exibido para enviar ao instrutor.');
+
+    form.reset();
+  });
+</script>
 </body>
 </html>
