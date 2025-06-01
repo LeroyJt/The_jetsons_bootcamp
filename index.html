@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>THE_JETSONS_BOOTCAMP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>THE JETSONS BOOTCAMP</h1>
+
+  <label for="studentId">Digite seu ID de Aluno:</label>
+  <input type="text" id="studentId" placeholder="Ex: 00123">
+  <button onclick="startBootcamp()">Começar</button>
+
+  <div id="activities" class="hidden">
+    <h2>Atividades</h2>
+    <form onsubmit="saveAnswers(); return false;">
+      <ol>
+        <li>
+          Verifique seu IP no CMD: <code>curl ifconfig.me</code><br/>
+          <input type="text" id="ipNormal">
+        </li>
+        <li>
+          Ative a VPN e verifique o IP:<br/>
+          <input type="text" id="ipVPN">
+        </li>
+        <li>
+          Use Tor via Proxychains: <code>proxychains curl ifconfig.me</code><br/>
+          <input type="text" id="ipTor">
+        </li>
+        <li>
+          Gere o hash de um arquivo via CMD:<br/>
+          <input type="text" id="hash">
+        </li>
+      </ol>
+      <button type="submit">Salvar Respostas</button>
+      <button type="button" onclick="exportAnswers()">Exportar .txt</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
