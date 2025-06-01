@@ -59,8 +59,7 @@
     <pre style="font-weight:bold; font-size: 1.2em;">
  _______ _     _ _______ _______ _______ _______ _______
  |_____| |____/  |______ |______ |______ |______ |______
- |     | |    \_ |______ ______| |______ |______ |______
-
+ 
      BEM-VINDO AO THE_JETSONS BOOTCAMP DE SEGURANÇA - WINDOWS EDITION
 
     Aqui você irá aprender, passo a passo, como proteger sua
@@ -72,15 +71,12 @@
     Complete as etapas, preencha os campos abaixo e salve seu progresso
     para que o instrutor possa avaliar seu aprendizado.
 
-    Use as dicas para descobrir quais comandos executar no Prompt de Comando.
+    Use as dicas para descobrir os comandos executar no CMD.
     </pre>
 
     <form id="bootcampForm">
       <label for="userId">1. Identifique-se (use seu número de matrícula ou ID):</label>
       <input type="text" id="userId" name="userId" placeholder="Ex: 2025001234" required />
-
-      <label for="email">2. Insira seu e-mail para contato (exemplo: aluno@exemplo.com):</label>
-      <input type="email" id="email" name="email" placeholder="aluno@exemplo.com" required />
 
       <label for="ipNormal">3. Primeiro, descubra o IP atual da sua máquina sem VPN:</label>
       <input type="text" id="ipNormal" name="ipNormal" placeholder="Digite o endereço IPv4 exibido no CMD" required />
@@ -94,7 +90,7 @@
       <label for="hashDoc">6. Extraia o hash SHA256 de um arquivo de texto qualquer no CMD e cole aqui:</label>
       <input type="text" id="hashDoc" name="hashDoc" placeholder="Digite o hash SHA256 do arquivo" required />
 
-      <label for="phishingDetect">7. Detecte um possível phishing nesta mensagem e explique o que te chamou atenção:</label>
+      <label for="phishingDetect">7. Cite 3 detalhes que nos faz detectar um phishing em e-email:</label>
       <textarea id="phishingDetect" name="phishingDetect" rows="4" placeholder="Descreva os sinais que indicam phishing..." required></textarea>
 
       <button type="submit">Salvar Atividade</button>
@@ -103,7 +99,6 @@
     <div class="dicas">
       <strong>Dicas para usar o Prompt de Comando (CMD):</strong>
       <ul>
-        <li>Para descobrir o IP da sua máquina, pense em um comando que começa com <em>ip</em> e termina com <em>config</em>.</li>
         <li>Após ativar sua VPN, use o mesmo comando para notar a diferença no endereço IP.</li>
         <li>Para saber o IP via Tor, conecte ao Tor e rode o mesmo comando anterior para conferir.</li>
         <li>Quer extrair o hash SHA256 de um arquivo? Pense em um comando do Windows que calcula hashes e precisa do caminho do arquivo.</li>
