@@ -2,51 +2,54 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>The Jetsons Bootcamp - Home</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THE_JETSONS BOOTCAMP</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <nav>
-    <ul>
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="ip.html">Consulta IP</a></li>
-      <li><a href="vpn.html">VPN</a></li>
-      <li><a href="tor.html">Tor</a></li>
-      <li><a href="hash.html">Hash Arquivo</a></li>
-      <li><a href="phishing.html">Phishing</a></li>
-    </ul>
-  </nav>
+  <pre class="ascii-art">
+ _____ _   _ ______     _______ _____  ____  _   _  ____   _____ _   _ ____  _____ ____  
+|_   _| \ | ||  _ \ \   / / ____|_   _|/ __ \| \ | |/ __ \ |_   _| \ | |  _ \| ____|  _ \ 
+  | | |  \| || |_) \ \_/ / (___   | | | |  | |  \| | |  | |  | | |  \| | | | |  _| | |_) |
+  | | | . ` ||  _ < \   / \___ \  | | | |  | | . ` | |  | |  | | | . ` | |_| | |___|  _ < 
+ _| |_| |\  || |_) | | |  ____) |_| |_| |__| | |\  | |__| | _| |_| |\  |____/|_____|_| \_\
+|_____|_| \_||____/  |_| |_____/|_____\____/|_| \_|\____/ |_____|_| \_|_____|_____|_| \_\
+  </pre>
 
   <main>
-    <h1>Bem-vindo ao THE_JETSONS_BOOTCAMP</h1>
-    <p>
-      Este bootcamp foi criado para você aprender segurança cibernética básica no Windows, utilizando o CMD.
-      Comece se identificando com seu número de aluno (sem nomes). Depois siga para as atividades.
-    </p>
+    <section class="intro">
+      <h1>Bem-vindo ao THE_JETSONS BOOTCAMP</h1>
+      <p>Você foi selecionado para participar de uma jornada de iniciação em segurança digital. Aqui, cada comando conta. Cada atividade te coloca mais perto do domínio das técnicas de proteção, privacidade e investigação digital. Prepare-se para simular um verdadeiro ambiente de terminal e salvar todas as suas descobertas.</p>
+      <p class="alert">⚠️ Utilize apenas o <strong>Prompt de Comando (cmd)</strong> do Windows para responder as questões. Não utilize o PowerShell.</p>
+    </section>
 
-    <form id="loginForm">
-      <label for="alunoId">Número do aluno:</label>
-      <input type="number" id="alunoId" name="alunoId" min="1" required />
-      <button type="submit">Entrar</button>
+    <form id="bootcamp-form">
+      <label for="ident">Seu ID de aluno:</label>
+      <input type="text" id="ident" name="ident" required><br><br>
+
+      <label for="ip-normal">1. Qual é o seu IP atual (sem VPN/Tor)?</label>
+      <input type="text" id="ip-normal" name="ip-normal" placeholder="ipconfig" required><br><br>
+
+      <label for="ip-vpn">2. Qual é o IP após ativar a VPN Proton?</label>
+      <input type="text" id="ip-vpn" name="ip-vpn" placeholder="ipconfig após conectar" required><br><br>
+
+      <label for="ip-tor">3. Qual é o IP com Tor rodando?</label>
+      <input type="text" id="ip-tor" name="ip-tor" placeholder="Tor + ipconfig" required><br><br>
+
+      <label for="hash">4. Gere o hash de um arquivo de sua escolha e cole aqui:</label>
+      <input type="text" id="hash" name="hash" placeholder="CertUtil -hashfile caminho MD5" required><br><br>
+
+      <label for="phishing">5. Aponte 3 sinais de um e-mail phishing:</label>
+      <textarea id="phishing" name="phishing" rows="3" required></textarea><br><br>
+
+      <button type="submit">Salvar Respostas</button>
     </form>
 
-    <p id="welcomeMsg" style="display:none;"></p>
+    <div id="success" class="hidden">
+      <p>✅ Suas respostas foram salvas no arquivo <strong>respostas.txt</strong>. Envie ao instrutor!</p>
+    </div>
   </main>
 
-  <script>
-    const form = document.getElementById('loginForm');
-    const welcomeMsg = document.getElementById('welcomeMsg');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const alunoId = document.getElementById('alunoId').value.trim();
-      if(alunoId) {
-        welcomeMsg.style.display = 'block';
-        welcomeMsg.textContent = `Olá, aluno #${alunoId}! Explore as atividades usando o menu acima.`;
-        form.style.display = 'none';
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
