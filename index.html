@@ -2,53 +2,49 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>THE_JETSONS BOOTCAMP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THE_JETSONS_BOOTCAMP</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <pre class="ascii-art">
- _____ _   _ ______     _______ _____  ____  _   _  ____   _____ _   _ ____  _____ ____  
-|_   _| \ | ||  _ \ \   / / ____|_   _|/ __ \| \ | |/ __ \ |_   _| \ | |  _ \| ____|  _ \ 
-  | | |  \| || |_) \ \_/ / (___   | | | |  | |  \| | |  | |  | | |  \| | | | |  _| | |_) |
-  | | | . ` ||  _ < \   / \___ \  | | | |  | | . ` | |  | |  | | | . ` | |_| | |___|  _ < 
- _| |_| |\  || |_) | | |  ____) |_| |_| |__| | |\  | |__| | _| |_| |\  |____/|_____|_| \_\
-|_____|_| \_||____/  |_| |_____/|_____\____/|_| \_|\____/ |_____|_| \_|_____|_____|_| \_\
-  </pre>
-
-  <main>
-    <section class="intro">
-      <h1>Bem-vindo ao THE_JETSONS BOOTCAMP</h1>
-      <p>Você foi selecionado para participar de uma jornada de iniciação em segurança digital. Aqui, cada comando conta. Cada atividade te coloca mais perto do domínio das técnicas de proteção, privacidade e investigação digital. Prepare-se para simular um verdadeiro ambiente de terminal e salvar todas as suas descobertas.</p>
-      <p class="alert">⚠️ Utilize apenas o <strong>Prompt de Comando (cmd)</strong> do Windows para responder as questões. Não utilize o PowerShell.</p>
-    </section>
-
-    <form id="bootcamp-form">
-      <label for="ident">Seu ID de aluno:</label>
-      <input type="text" id="ident" name="ident" required><br><br>
-
-      <label for="ip-normal">1. Qual é o seu IP atual (sem VPN/Tor)?</label>
-      <input type="text" id="ip-normal" name="ip-normal" placeholder="ipconfig" required><br><br>
-
-      <label for="ip-vpn">2. Qual é o IP após ativar a VPN Proton?</label>
-      <input type="text" id="ip-vpn" name="ip-vpn" placeholder="ipconfig após conectar" required><br><br>
-
-      <label for="ip-tor">3. Qual é o IP com Tor rodando?</label>
-      <input type="text" id="ip-tor" name="ip-tor" placeholder="Tor + ipconfig" required><br><br>
-
-      <label for="hash">4. Gere o hash de um arquivo de sua escolha e cole aqui:</label>
-      <input type="text" id="hash" name="hash" placeholder="CertUtil -hashfile caminho MD5" required><br><br>
-
-      <label for="phishing">5. Aponte 3 sinais de um e-mail phishing:</label>
-      <textarea id="phishing" name="phishing" rows="3" required></textarea><br><br>
-
-      <button type="submit">Salvar Respostas</button>
-    </form>
-
-    <div id="success" class="hidden">
-      <p>✅ Suas respostas foram salvas no arquivo <strong>respostas.txt</strong>. Envie ao instrutor!</p>
+  <div class="container">
+    <div class="ascii-art">
+      _____ _   _ ______     _______ _____ ____  _   _  _____ ______  
+     |_   _| \ | |  ____|   |__   __|_   _/ __ \| \ | |/ ____|  ____| 
+       | | |  \| | |__ ______  | |    | || |  | |  \| | (___ | |__    
+       | | | . ` |  __|______| | |    | || |  | | . ` |\___ \|  __|   
+      _| |_| |\  | |____     | |   _| || |__| | |\  |____) | |____  
+     |_____|_| \_|______|    |_|  |_____\____/|_| \_|_____/|______| 
     </div>
-  </main>
+
+    <h1>THE_JETSONS_BOOTCAMP</h1>
+    <p>Bem-vindo ao Bootcamp de Segurança - Windows Edition.</p>
+    <p>Complete as atividades abaixo usando apenas o <strong>Prompt de Comando (CMD)</strong>. Não use PowerShell.</p>
+
+    <label for="userId">1. Informe seu número de identificação:</label>
+    <input type="text" id="userId" placeholder="Seu número aqui" />
+
+    <label for="ipNormal">2. Consulte seu IP normal (sem VPN/Tor):</label>
+    <input type="text" id="ipNormal" placeholder="Exemplo: 192.168.1.100" />
+
+    <label for="ipVpn">3. Consulte seu IP com VPN ativada:</label>
+    <input type="text" id="ipVpn" placeholder="Exemplo: 10.8.0.5" />
+
+    <label for="ipTor">4. Consulte seu IP com Tor ativado:</label>
+    <input type="text" id="ipTor" placeholder="Exemplo: 185.220.101.1" />
+
+    <label for="hashFile">5. Extraia o hash SHA256 de um arquivo via CMD (caminho + hash):</label>
+    <input type="text" id="hashFile" placeholder="Exemplo: arquivo.txt - 9c4a0b..." />
+
+    <label for="phishingDetect">6. Detecte phishing no e-mail abaixo e descreva:</label>
+    <textarea id="phishingDetect" rows="5" placeholder="Descreva o que você encontrou"></textarea>
+
+    <button id="saveBtn">Salvar respostas em TXT</button>
+
+    <footer>
+      <p>Use comandos no prompt CMD para cada tarefa. Não utilize PowerShell.</p>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
