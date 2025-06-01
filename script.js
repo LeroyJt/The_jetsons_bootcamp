@@ -1,46 +1,55 @@
+// Estado do bootcamp
+let alunoID = "";
+const respostas = {};
+
 function startBootcamp() {
-    const id = document.getElementById('studentId').value.trim();
-    if (!id) {
-        alert('Por favor, digite seu número de aluno.');
-        return;
-    }
-    // Esconder login, mostrar atividades
-    document.getElementById('login-section').style.display = 'none';
-    document.getElementById('activities-section').style.display = 'block';
-    // Guardar o ID para salvar junto com respostas
-    window.studentId = id;
+  const idInput = document.getElementById("alunoID");
+  if (idInput.value.trim() === "") {
+    alert("Por favor, digite seu número de aluno para continuar.");
+    return;
+  }
+  alunoID = idInput.value.trim();
+  mostrarPagina("atividade1");
 }
 
-document.getElementById('activities-form').addEventListener('submit', function(e) {
-    e.preventDefault();
+function mostrarPagina(id) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.add("hidden");
+    page.classList.remove("active");
+  });
+  const pagina = document.getElementById(id);
+  if(pagina) {
+    pagina.classList.remove("hidden");
+    pagina.classList.add("active");
+  }
+}
 
-    const ipCmd = document.getElementById('ipCmd').value.trim();
-    const ipVpn = document.getElementById('ipVpn').value.trim();
-    const ipTor = document.getElementById('ipTor').value.trim();
-    const hash = document.getElementById('hash').value.trim();
+function salvarResposta(num) {
+  const textarea = document.getElementById("resposta" + num);
+  if (!textarea.value.trim()) {
+    alert("Por favor, preencha sua resposta antes de salvar.");
+    return;
+  }
+  respostas["atividade" + num] = textarea.value.trim();
+  alert("Resposta da atividade " + num + " salva.");
+}
 
-    if (!ipCmd || !ipVpn || !ipTor || !hash) {
-        alert('Por favor, preencha todas as respostas.');
-        return;
-    }
+function proximaAtividade(num) {
+  if (num <= 5) {
+    mostrarPagina("atividade" + num);
+  }
+}
 
-    const content = 
-`Aluno ID: ${window.studentId}
-Atividade THE_JETSONS_BOOTCAMP
-
-1. IP via CMD: ${ipCmd}
-2. IP via VPN: ${ipVpn}
-3. IP via TOR: ${ipTor}
-4. Hash extraído: ${hash}
-`;
-
-    // Criar arquivo para download
-    const blob = new Blob([content], {type: 'text/plain;charset=utf-8'});
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `respostas_aluno_${window.studentId}.txt`;
-    link.click();
-
-    document.getElementById('result-msg').textContent = 'Respostas salvas! Faça upload deste arquivo para o instrutor.';
-    this.reset();
-});
+function finalizarBootcamp() {
+  // Salvar última resposta
+  salvarResposta(5);
+  mostrarPagina("final");
+  const pre = document.getElementById("respostasSalvas");
+  let texto = `Aluno: ${alunoID}\n\n`;
+  for(let i=1; i<=5; i++) {
+    texto += `Atividade ${i}:\n${respostas["atividade"+i] || "(Sem resposta)"}\n\n`;
+  }
+  pre.textContent = texto;
+  // Aqui você pode também salvar esse texto localmente com APIs, ou pedir para copiar
+  alert("Bootcamp finalizado! Copie suas respostas para enviar ao instrutor.");
+}
