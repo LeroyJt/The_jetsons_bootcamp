@@ -1,135 +1,222 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>THE_JETSONS_BOOTCAMP - Módulo 2</title>
-  <style>
-    body {
-      background-color: #0b0c10;
-      color: #66fcf1;
-      font-family: 'Courier New', Courier, monospace;
-      margin: 0;
-      padding: 2rem;
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: #1f2833;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(102, 252, 241, 0.2);
-    }
-    h1, h2 {
-      color: #45a29e;
-      text-align: center;
-    }
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-weight: bold;
-    }
-    input, textarea {
-      width: 100%;
-      background-color: #0b0c10;
-      color: #66fcf1;
-      border: 1px solid #66fcf1;
-      padding: 0.5rem;
-      border-radius: 5px;
-      margin-top: 0.25rem;
-      font-size: 1rem;
-    }
-    button {
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      border: none;
-      background-color: #66fcf1;
-      color: #0b0c10;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    #resultado, #ranking {
-      margin-top: 2rem;
-      background: #0f2027;
-      padding: 1rem;
-      border-left: 4px solid #66fcf1;
-      border-radius: 5px;
-    }
-    ul { padding-left: 1.2rem; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THE_JETSONS_BOOTCAMP – Módulo 2</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body>
-  <div class="container">
-    <h1>THE_JETSONS_BOOTCAMP</h1>
-    <h2>Módulo 2 – Privacidade e Rastreamento</h2>
+<body class="module2-body">
+  <div class="module2-container">
+    <h1>Módulo 2 – Privacidade e Rastreamento</h1>
+    <p style="text-align:center; color: var(--accent-light); margin-bottom:1rem;">
+      Avalie IPs (IPv4 ou IPv6), hash e cite sinais de phishing.
+      Cada passo vale pontos (1–10). Ranking local e envio ao backend.
+    </p>
 
-    <form id="modulo2Form">
-      <label for="userId">Número de Identificação (1 a 50):</label>
-      <input type="number" id="userId" name="userId" min="1" max="50" required />
+    <form id="formModulo2">
+      <!-- 1) Número de Identificação -->
+      <label for="userId2">1. Número de Identificação (1–50):</label>
+      <input type="number" id="userId2" name="userId2" min="1" max="50" required />
+      <div id="errorUser2" class="error"></div>
 
-      <label>1. Qual é o seu IP atual sem VPN?</label>
-      <input type="text" id="ipNormal" required />
+      <!-- 2) IP sem VPN -->
+      <label for="ipNormal2">2. IP atual sem VPN:</label>
+      <input type="text" id="ipNormal2" name="ipNormal2"
+             placeholder="Ex: 192.168.1.10 ou fe80::1ff:fe23:4567:890a" required />
+      <div id="errorIpNorm2" class="error"></div>
 
-      <label>2. Qual é o seu IP ao usar VPN?</label>
-      <input type="text" id="ipVpn" required />
+      <!-- 3) IP com VPN -->
+      <label for="ipVpn2">3. IP ao usar VPN:</label>
+      <input type="text" id="ipVpn2" name="ipVpn2"
+             placeholder="Ex: 10.8.0.5 ou 2001:4860:4860::8888" required />
+      <div id="errorIpVpn2" class="error"></div>
 
-      <label>3. Qual é o seu IP usando o navegador Tor?</label>
-      <input type="text" id="ipTor" required />
+      <!-- 4) IP com Tor -->
+      <label for="ipTor2">4. IP usando Tor:</label>
+      <input type="text" id="ipTor2" name="ipTor2"
+             placeholder="Ex: 185.220.101.1 ou 2606:4700:4700::1111" required />
+      <div id="errorIpTor2" class="error"></div>
 
-      <label>4. Cole aqui o hash SHA256 do arquivo fornecido:</label>
-      <input type="text" id="hashFile" required />
+      <!-- 5) Hash SHA256 -->
+      <label for="hashFile2">5. Hash SHA256 do arquivo:</label>
+      <input type="text" id="hashFile2" name="hashFile2"
+             placeholder="Ex: 3a7d…f5b9 (64 hex)" required />
+      <div id="errorHash2" class="error"></div>
 
-      <label>5. Cite ao menos 2 sinais de phishing que você reconheceu:</label>
-      <textarea id="phishingDetect" rows="3" required></textarea>
+      <!-- 6) Sinais de Phishing -->
+      <label for="phishingDetect2">
+        6. Cite 2 sinais de phishing (separe por vírgulas):
+      </label>
+      <textarea id="phishingDetect2" name="phishingDetect2" rows="3"
+                placeholder="Ex: URL suspeita, pedido urgente de senha"
+                required></textarea>
+      <div id="errorPhishing2" class="error"></div>
 
       <button type="button" onclick="avaliarModulo2()">Enviar e Ver Resultado</button>
     </form>
 
-    <div id="resultado"></div>
-    <div id="ranking"></div>
+    <!-- Exibição de nota e ranking -->
+    <div id="resultadoModulo2"></div>
+    <div id="rankingModulo2"></div>
   </div>
 
   <script>
-    const rankingGlobal = [];
+    // Validação IPv4
+    function isIPv4(ip) {
+      var partes = ip.split('.');
+      if (partes.length !== 4) return false;
+      for (var i = 0; i < partes.length; i++) {
+        var p = partes[i];
+        if (!/^\d+$/.test(p)) return false;
+        var num = parseInt(p, 10);
+        if (num < 0 || num > 255) return false;
+      }
+      return true;
+    }
+
+    // Validação IPv6 (8 grupos hex de 1–4 dígitos separados por ":")
+    function isIPv6(ip) {
+      var regexIPv6 = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+      return regexIPv6.test(ip);
+    }
+
+    // Validação combinada (IPv4 ou IPv6)
+    function validaIP(ip) {
+      return isIPv4(ip) || isIPv6(ip);
+    }
+
+    // Array local para ranking (somente sessão atual, até 10)
+    var rankingLocal2 = [];
 
     function avaliarModulo2() {
-      const id = document.getElementById('userId').value.trim();
-      const ip1 = document.getElementById('ipNormal').value.trim();
-      const ip2 = document.getElementById('ipVpn').value.trim();
-      const ip3 = document.getElementById('ipTor').value.trim();
-      const hash = document.getElementById('hashFile').value.trim();
-      const phishing = document.getElementById('phishingDetect').value.trim().toLowerCase();
+      // Limpar erros anteriores
+      document.getElementById('errorUser2').textContent = '';
+      document.getElementById('errorIpNorm2').textContent = '';
+      document.getElementById('errorIpVpn2').textContent = '';
+      document.getElementById('errorIpTor2').textContent = '';
+      document.getElementById('errorHash2').textContent = '';
+      document.getElementById('errorPhishing2').textContent = '';
 
-      let nota = 0;
+      var total2 = 0;
 
-      if (ip1 && ip2 && ip1 !== ip2) nota++;
-      if (ip2 && ip3 && ip2 !== ip3) nota++;
-      if (/^[a-f0-9]{64}$/i.test(hash)) nota++;
-      if (/(link|url|estranho)/.test(phishing)) nota += 1;
-      if (/(urgente|erro|senha|anexo)/.test(phishing)) nota += 1;
-      if (ip1 && ip2 && ip3 && hash && phishing) nota++;
+      // 1) UserID (1 ponto)
+      var user2 = document.getElementById('userId2').value.trim();
+      if (!user2 || isNaN(user2) || +user2 < 1 || +user2 > 50) {
+        document.getElementById('errorUser2').textContent = 'Informe um número entre 1 e 50.';
+      } else {
+        total2 += 1;
+      }
 
-      let nivel = '';
-      if (nota <= 2) nivel = '🟥 Inseguro Digital';
-      else if (nota <= 4) nivel = '🟨 Vigilante em Treinamento';
-      else if (nota === 5) nivel = '🟩 Guardião Atento';
-      else if (nota === 6) nivel = '🟦 Protetor Cibernético';
+      // 2) IP sem VPN (2 pontos)
+      var ipNorm2 = document.getElementById('ipNormal2').value.trim();
+      if (!validaIP(ipNorm2)) {
+        document.getElementById('errorIpNorm2').textContent =
+          'IP inválido (IPv4 ou IPv6 esperado).';
+      } else {
+        total2 += 2;
+      }
 
-      rankingGlobal.push({ id: id, nota: nota, nivel: nivel });
-      rankingGlobal.sort((a, b) => b.nota - a.nota);
-      if (rankingGlobal.length > 10) rankingGlobal.length = 10;
+      // 3) IP com VPN (2 pontos)
+      var ipVpn2 = document.getElementById('ipVpn2').value.trim();
+      if (!validaIP(ipVpn2)) {
+        document.getElementById('errorIpVpn2').textContent =
+          'IP inválido (IPv4 ou IPv6 esperado).';
+      } else {
+        total2 += 2;
+      }
 
-      document.getElementById('resultado').innerHTML = `
-        <h3>✅ Sua Nota: ${nota}/6</h3>
-        <p>🏅 Nível: <strong>${nivel}</strong></p>
+      // 4) IP via Tor (2 pontos)
+      var ipTor2 = document.getElementById('ipTor2').value.trim();
+      if (!validaIP(ipTor2)) {
+        document.getElementById('errorIpTor2').textContent =
+          'IP inválido (IPv4 ou IPv6 esperado).';
+      } else {
+        total2 += 2;
+      }
+
+      // 5) Hash SHA256 (1 ponto)
+      var hash2 = document.getElementById('hashFile2').value.trim();
+      if (!/^[a-f0-9]{64}$/i.test(hash2)) {
+        document.getElementById('errorHash2').textContent =
+          'Hash SHA256 inválido (64 hexadecimais).';
+      } else {
+        total2 += 1;
+      }
+
+      // 6) Sinais de Phishing (1 ponto; conta itens separados por vírgula)
+      var phishing2 = document.getElementById('phishingDetect2').value.trim();
+      var itens2 = phishing2.split(',')
+        .map(function(s) { return s.trim(); })
+        .filter(function(s) { return s !== ''; });
+      if (itens2.length < 2) {
+        document.getElementById('errorPhishing2').textContent =
+          'Informe ao menos 2 sinais, separados por vírgula.';
+      } else {
+        total2 += 1;
+      }
+
+      // 7) Bônus de IPs distintos (1 ponto)
+      if (
+        validaIP(ipNorm2) && validaIP(ipVpn2) && validaIP(ipTor2) &&
+        ipNorm2 !== ipVpn2 && ipNorm2 !== ipTor2 && ipVpn2 !== ipTor2
+      ) {
+        total2 += 1;
+      }
+
+      if (total2 > 10) total2 = 10;
+
+      // Exibe resultado ao aluno
+      var res2 = document.getElementById('resultadoModulo2');
+      res2.innerHTML = `
+        <h2>✅ Sua Nota no Módulo 2: ${total2} / 10</h2>
+        <ul style="margin-left:1.2rem;">
+          <li>1 ponto – Número de chamada válido (1–50)</li>
+          <li>2 pontos – IP sem VPN (IPv4 ou IPv6 correto)</li>
+          <li>2 pontos – IP com VPN (IPv4 ou IPv6 correto)</li>
+          <li>2 pontos – IP via Tor (IPv4 ou IPv6 correto)</li>
+          <li>1 ponto – Hash SHA256 válido (64 hexadecimais)</li>
+          <li>1 ponto – ≥ 2 sinais de phishing (separados por vírgula)</li>
+          <li>1 ponto – Bônus se todos os 3 IPs forem distintos</li>
+        </ul>
       `;
 
-      let top10 = '<h3>🏆 TOP 10 Alunos</h3><ul>';
-      rankingGlobal.forEach(entry => {
-        top10 += `<li>#${entry.id} – ${entry.nivel} (${entry.nota}/6)</li>`;
+      // Atualiza ranking local (máx 10 desta sessão)
+      rankingLocal2.push({ id: user2, nota: total2 });
+      rankingLocal2.sort(function(a, b) { return b.nota - a.nota; });
+      if (rankingLocal2.length > 10) rankingLocal2.length = 10;
+
+      var htmlRank = '<h3>🏆 TOP 10 (Sessão Atual)</h3><ul>';
+      rankingLocal2.forEach(function(entry) {
+        htmlRank += `<li>#${entry.id} – ${entry.nota}/10</li>`;
       });
-      top10 += '</ul>';
-      document.getElementById('ranking').innerHTML = top10;
+      htmlRank += '</ul>';
+      document.getElementById('rankingModulo2').innerHTML = htmlRank;
+
+      // --- ENVIO AO BACKEND (Apps Script) ---
+      var URL_DO_WEB_APP =
+        "https://script.google.com/macros/s/AKfycbxVU54KiTjv_QE2teSiZ_zGpvNmE2QXfUMsJoNSJRj5Nx4BiExiFx6BEEf0lkpmNhv5/exec";
+
+      var payload2 = {
+        modulo: 'Módulo 2',
+        userId: user2,
+        ipNormal: ipNorm2,
+        ipVpn: ipVpn2,
+        ipTor: ipTor2,
+        hash: hash2,
+        phishing: phishing2,
+        nota: total2,
+        timestamp: new Date().toISOString()
+      };
+
+      fetch(URL_DO_WEB_APP, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload2)
+      }).catch(function() {
+        // Ignora erro de CORS, se ocorrer
+      });
     }
   </script>
 </body>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THE_JETSONS_BOOTCAMP – Ranking Público</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Ranking Público Geral</h1>
+    <p>Todas as submissões de todos os módulos, ordenadas por nota (decrescente).</p>
+    <div id="tabelaRanking" style="margin-top:1rem;"></div>
+  </div>
+
+  <script>
+    // Link CSV público da aba "Respostas" da sua planilha
+    var URL_CSV =
+      "https://docs.google.com/spreadsheets/d/1wcNifnoergqUF7cC7aukxyQIyQTvyUixiiQb0l66sxM/pub?output=csv";
+
+    // Converte CSV em array de objetos
+    async function fetchRanking() {
+      var resp = await fetch(URL_CSV);
+      var csvText = await resp.text();
+      var linhas = csvText.trim().split('\n');
+      var cabecalho = linhas[0].split(',');
+      var dados = linhas.slice(1).map(function(linha) {
+        var valores = linha.split(',');
+        var obj = {};
+        cabecalho.forEach(function(col, idx) {
+          obj[col.trim()] = valores[idx] ? valores[idx].trim() : "";
+        });
+        return obj;
+      });
+      return dados;
+    }
+
+    // Ao carregar, obtém ranking e exibe
+    window.addEventListener('DOMContentLoaded', async function() {
+      var dados = await fetchRanking();
+      // Filtra apenas entradas com "Nota" numérica válida
+      var filtrados = dados.filter(function(item) {
+        return !isNaN(parseInt(item.Nota));
+      });
+      // Ordena decrescente pela nota
+      filtrados.sort(function(a, b) {
+        return parseInt(b.Nota) - parseInt(a.Nota);
+      });
+      // Monta tabela HTML simples
+      var html = '<table style="width:100%; border-collapse:collapse;">';
+      html += `
+        <tr style="border-bottom:1px solid var(--accent-green);">
+          <th style="text-align:left; padding:8px;">Módulo</th>
+          <th style="text-align:left; padding:8px;">UserID</th>
+          <th style="text-align:left; padding:8px;">Nota</th>
+          <th style="text-align:left; padding:8px;">Timestamp</th>
+        </tr>`;
+      filtrados.forEach(function(item) {
+        html += `
+          <tr style="border-bottom:1px solid #333;">
+            <td style="padding:8px;">${item.Módulo}</td>
+            <td style="padding:8px;">${item.UserID}</td>
+            <td style="padding:8px;">${item.Nota}</td>
+            <td style="padding:8px;">${item.Timestamp}</td>
+          </tr>`;
+      });
+      html += '</table>';
+      document.getElementById('tabelaRanking').innerHTML = html;
+    });
+  </script>
+</body>
+</html>

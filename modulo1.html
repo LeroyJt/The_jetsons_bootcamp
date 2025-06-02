@@ -1,158 +1,211 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>THE_JETSONS_BOOTCAMP</title>
-<style>
-  body {
-    background-color: #000000;
-    color: #00ff00;
-    font-family: 'Courier New', Courier, monospace;
-    margin: 0;
-    padding: 20px;
-  }
-  h1, h2 {
-    border-bottom: 1px solid #00ff00;
-    padding-bottom: 5px;
-  }
-  .terminal {
-    background-color: #000000;
-    padding: 20px;
-    border: 1px solid #00ff00;
-    max-width: 800px;
-    margin: auto;
-  }
-  label {
-    display: block;
-    margin-top: 15px;
-  }
-  input[type="text"], input[type="email"], textarea {
-    width: 100%;
-    background-color: #000000;
-    border: 1px solid #00ff00;
-    color: #00ff00;
-    font-family: monospace;
-    font-size: 1em;
-    padding: 8px;
-    margin-top: 5px;
-  }
-  button {
-    margin-top: 20px;
-    background-color: #00ff00;
-    color: #000000;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .dicas {
-    background-color: #003300;
-    padding: 10px;
-    margin-top: 20px;
-    font-style: italic;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>THE_JETSONS_BOOTCAMP – Módulo 1</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <div class="terminal">
-    <pre style="font-weight:bold; font-size: 1.2em;">
+  <div class="container">
+    <h1>Módulo 1 – Diagnóstico com CMD</h1>
+    <div class="terminal">
+      <pre style="font-weight:bold;">
  _______ _     _ _______ _______ _______ _______ _______
  |_____| |____/  |______ |______ |______ |______ |______
  
-     BEM-VINDO AO THE_JETSONS BOOTCAMP DE SEGURANÇA - WINDOWS EDITION
+     BEM-VINDO AO THE_JETSONS BOOTCAMP – MÓDULO 1
 
-    Aqui você irá aprender, passo a passo, como proteger sua
-    privacidade e entender conceitos básicos de segurança.
-    Prepare-se para realizar atividades práticas diretamente no CMD,
-    entender seus IPs e conexões, usar VPN e Tor, extrair hashes e
-    identificar phishing com atenção e cuidado.
+    Descubra IPs e hashes no CMD e identifique sinais de phishing.
+    Cada passo vale pontos (1–10), com correção automática imediata.
 
-    Complete as etapas, preencha os campos abaixo e salve seu progresso
-    para que o instrutor possa avaliar seu aprendizado.
+    Use as dicas abaixo para executar comandos no Windows CMD.
+      </pre>
 
-    Use as dicas para descobrir os comandos executar no CMD.
-    </pre>
+      <form id="formModulo1">
+        <!-- 1) Número de Identificação -->
+        <label for="userId">1. Identifique-se (número de chamada 1–50):</label>
+        <input type="number" id="userId" name="userId" min="1" max="50" required />
+        <div id="errorUserId" class="error"></div>
 
-    <form id="bootcampForm">
-      <label for="userId">1. Identifique-se (use seu número de chamada):</label>
-      <input type="text" id="userId" name="userId" placeholder="Ex: 2025001234" required />
+        <!-- 2) IP sem VPN -->
+        <label for="ipNormal">2. IP atual da sua máquina sem VPN:</label>
+        <input type="text" id="ipNormal" name="ipNormal"
+               placeholder="Ex: 192.168.1.10 ou fe80::1ff:fe23:4567:890a" required />
+        <div id="errorIpNormal" class="error"></div>
 
-      <label for="ipNormal">3. Primeiro, descubra o IP atual da sua máquina sem VPN:</label>
-      <input type="text" id="ipNormal" name="ipNormal" placeholder="Digite o endereço IPv4 exibido no CMD" required />
+        <!-- 3) IP com VPN -->
+        <label for="ipVpn">3. IP ao usar VPN:</label>
+        <input type="text" id="ipVpn" name="ipVpn"
+               placeholder="Ex: 10.8.0.5 ou 2001:4860:4860::8888" required />
+        <div id="errorIpVpn" class="error"></div>
 
-      <label for="ipVpn">4. Agora, conecte sua VPN e descubra o novo IP:</label>
-      <input type="text" id="ipVpn" name="ipVpn" placeholder="Digite o endereço IPv4 após conexão VPN" required />
+        <!-- 4) IP com Tor -->
+        <label for="ipTor">4. IP usando Tor (via Tor Browser):</label>
+        <input type="text" id="ipTor" name="ipTor"
+               placeholder="Ex: 185.220.101.1 ou 2606:4700:4700::1111" required />
+        <div id="errorIpTor" class="error"></div>
 
-      <label for="ipTor">5. Por fim, conecte-se via Tor e descubra o IP:</label>
-      <input type="text" id="ipTor" name="ipTor" placeholder="Digite o endereço IPv4 exibido usando Tor" required />
+        <!-- 5) Hash SHA256 -->
+        <label for="hashDoc">5. Hash SHA256 do arquivo (CMD):</label>
+        <input type="text" id="hashDoc" name="hashDoc"
+               placeholder="Ex: 3a7d…f5b9 (64 hex)" required />
+        <div id="errorHash" class="error"></div>
 
-      <label for="hashDoc">6. Extraia o hash SHA256 do arquivo de texto dado pela instrutora no CMD e cole aqui:</label>
-      <input type="text" id="hashDoc" name="hashDoc" placeholder="Digite o hash SHA256 do arquivo" required />
+        <!-- 6) Sinais de Phishing -->
+        <label for="phishingDetect">
+          6. Cite 3 sinais de phishing (separe por vírgulas):
+        </label>
+        <textarea id="phishingDetect" name="phishingDetect" rows="4"
+                  placeholder="Ex: URL estranha, erro ortográfico, pedido urgente"
+                  required></textarea>
+        <div id="errorPhishing" class="error"></div>
 
-      <label for="phishingDetect">7. Cite 3 detalhes que nos faz detectar um phishing em e-email:</label>
-      <textarea id="phishingDetect" name="phishingDetect" rows="4" placeholder="Descreva os sinais que indicam phishing..." required></textarea>
+        <button type="button" onclick="avaliarModulo1()">Enviar e Ver Nota</button>
+      </form>
 
-      <button type="submit">Salvar Atividade</button>
-    </form>
-
-    <div class="dicas">
-      <strong>Dicas para usar o Prompt de Comando (CMD):</strong>
-      <ul>
-        <li>Após ativar sua VPN, use o mesmo comando para notar a diferença no endereço IP.</li>
-        <li>Para saber o IP via Tor, conecte ao Tor e rode o mesmo comando anterior para conferir.</li>
-        <li>Quer extrair o hash SHA256 de um arquivo? Pense em um comando do Windows que calcula hashes e precisa do caminho do arquivo.</li>
-        <li>Para identificar phishing, observe sempre links estranhos, erros ortográficos e solicitações urgentes.</li>
-      </ul>
+      <div id="resultadoModulo1" style="margin-top:1.5rem;"></div>
     </div>
-
-    <pre id="saveResult" style="margin-top: 20px; border: 1px solid #00ff00; padding: 10px; white-space: pre-wrap;"></pre>
   </div>
 
-<script>
-  const form = document.getElementById('bootcampForm');
-  const saveResult = document.getElementById('saveResult');
+  <script>
+    // Validação IPv4
+    function isIPv4(ip) {
+      var partes = ip.split('.');
+      if (partes.length !== 4) return false;
+      for (var i = 0; i < partes.length; i++) {
+        var p = partes[i];
+        if (!/^\d+$/.test(p)) return false;
+        var num = parseInt(p, 10);
+        if (num < 0 || num > 255) return false;
+      }
+      return true;
+    }
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+    // Validação IPv6 (8 grupos hex de 1–4 dígitos separados por ":")
+    function isIPv6(ip) {
+      var regexIPv6 = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
+      return regexIPv6.test(ip);
+    }
 
-    const data = {
-      ID: form.userId.value.trim(),
-      Email: form.email.value.trim(),
-      IP_Sem_VPN: form.ipNormal.value.trim(),
-      IP_Com_VPN: form.ipVpn.value.trim(),
-      IP_Com_TOR: form.ipTor.value.trim(),
-      Hash_SHA256: form.hashDoc.value.trim(),
-      Detect_Pishing: form.phishingDetect.value.trim(),
-      Data: new Date().toLocaleString()
-    };
+    // Validação combinada (IPv4 ou IPv6)
+    function validaIP(ip) {
+      return isIPv4(ip) || isIPv6(ip);
+    }
 
-    // Formata o texto a ser salvo
-    const output = `
-===== THE_JETSONS BOOTCAMP - RESULTADO DE ATIVIDADES =====
-Data: ${data.Data}
+    function avaliarModulo1() {
+      // Limpa erros anteriores
+      document.getElementById('errorUserId').textContent = '';
+      document.getElementById('errorIpNormal').textContent = '';
+      document.getElementById('errorIpVpn').textContent = '';
+      document.getElementById('errorIpTor').textContent = '';
+      document.getElementById('errorHash').textContent = '';
+      document.getElementById('errorPhishing').textContent = '';
 
-1. ID do aluno: ${data.ID}
-2. E-mail: ${data.Email}
+      var total = 0;
 
-3. IP da máquina sem VPN: ${data.IP_Sem_VPN}
-4. IP após conexão VPN: ${data.IP_Com_VPN}
-5. IP ao usar Tor: ${data.IP_Com_TOR}
+      // 1) Número de Identificação (1 ponto)
+      var userId = document.getElementById('userId').value.trim();
+      if (!userId || isNaN(userId) || +userId < 1 || +userId > 50) {
+        document.getElementById('errorUserId').textContent = 'Informe um número entre 1 e 50.';
+      } else {
+        total += 1;
+      }
 
-6. Hash SHA256 do arquivo: ${data.Hash_SHA256}
+      // 2) IP sem VPN (2 pontos)
+      var ipNormal = document.getElementById('ipNormal').value.trim();
+      if (!validaIP(ipNormal)) {
+        document.getElementById('errorIpNormal').textContent =
+          'IP inválido (IPv4 ou IPv6 esperado).';
+      } else {
+        total += 2;
+      }
 
-7. Detecção de phishing:
-${data.Detect_Pishing}
+      // 3) IP com VPN (2 pontos)
+      var ipVpn = document.getElementById('ipVpn').value.trim();
+      if (!validaIP(ipVpn)) {
+        document.getElementById('errorIpVpn').textContent =
+          'IP inválido (IPv4 ou IPv6 esperado).';
+      } else {
+        total += 2;
+      }
 
-==========================================================`;
+      // 4) IP com Tor (2 pontos)
+      var ipTor = document.getElementById('ipTor').value.trim();
+      if (!validaIP(ipTor)) {
+        document.getElementById('errorIpTor').textContent =
+          'IP inválido (IPv4 ou IPv6 esperado).';
+      } else {
+        total += 2;
+      }
 
-    // Exibe o texto na tela para o instrutor copiar
-    saveResult.textContent = output;
+      // 5) Hash SHA256 (1 ponto)
+      var hash = document.getElementById('hashDoc').value.trim();
+      if (!/^[a-f0-9]{64}$/i.test(hash)) {
+        document.getElementById('errorHash').textContent =
+          'Hash SHA256 inválido (precisa ter 64 caracteres hexadecimais).';
+      } else {
+        total += 1;
+      }
 
-    alert('Atividade salva! Copie o texto exibido para enviar ao instrutor.');
+      // 6) Sinais de Phishing (1 ponto; conta itens separados por vírgula)
+      var phishingText = document.getElementById('phishingDetect').value.trim();
+      var itens = phishingText.split(',')
+        .map(function(s) { return s.trim(); })
+        .filter(function(s) { return s !== ''; });
+      if (itens.length < 3) {
+        document.getElementById('errorPhishing').textContent =
+          'Informe ao menos 3 sinais, separados por vírgula.';
+      } else {
+        total += 1;
+      }
 
-    form.reset();
-  });
-</script>
+      // 7) Bônus de preenchimento completo (2 pontos se total ≥ 8)
+      if (total >= 8) {
+        total += 2;
+      }
+      if (total > 10) total = 10;
+
+      // Exibe resultado ao aluno
+      var resDiv = document.getElementById('resultadoModulo1');
+      resDiv.innerHTML = `
+        <h2>✅ Sua Nota no Módulo 1: ${total} / 10</h2>
+        <ul style="margin-left:1.2rem;">
+          <li>1 ponto – Número de chamada válido (1–50)</li>
+          <li>2 pontos – IP sem VPN (IPv4 ou IPv6 correto)</li>
+          <li>2 pontos – IP com VPN (IPv4 ou IPv6 correto)</li>
+          <li>2 pontos – IP via Tor (IPv4 ou IPv6 correto)</li>
+          <li>1 ponto – Hash SHA256 válido (64 hexadecimais)</li>
+          <li>1 ponto – ≥ 3 sinais de phishing (separados por vírgula)</li>
+          <li>2 pontos – Bônus se os itens acima (1–6) estiverem corretos</li>
+        </ul>
+      `;
+
+      // --- ENVIO AO BACKEND (Apps Script) ---
+      var URL_DO_WEB_APP =
+        "https://script.google.com/macros/s/AKfycbxVU54KiTjv_QE2teSiZ_zGpvNmE2QXfUMsJoNSJRj5Nx4BiExiFx6BEEf0lkpmNhv5/exec";
+
+      var payload = {
+        modulo: 'Módulo 1',
+        userId: userId,
+        ipNormal: ipNormal,
+        ipVpn: ipVpn,
+        ipTor: ipTor,
+        hash: hash,
+        phishing: phishingText,
+        nota: total,
+        timestamp: new Date().toISOString()
+      };
+
+      fetch(URL_DO_WEB_APP, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(function() {
+        // Ignora erro de CORS, se ocorrer
+      });
+    }
+  </script>
 </body>
 </html>
