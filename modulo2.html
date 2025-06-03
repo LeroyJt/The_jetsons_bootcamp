@@ -10,8 +10,9 @@
   <div class="module2-container">
     <h1>Módulo 2 – Privacidade e Rastreamento</h1>
     <p style="text-align:center; color: var(--accent-light); margin-bottom:1rem;">
-      Avalie IPs (IPv4 ou IPv6), hash e cite sinais de phishing.
-      Cada passo vale pontos (1–10). Ranking local e envio ao backend.
+      Avalie IPs (IPv4 ou IPv6), hash e cite sinais de phishing.<br>
+      Cada passo vale pontos (1–10). Ranking local e envio ao backend.<br>
+      NOVA TENTATIVA NÃO É PERMITIDA.
     </p>
 
     <form id="formModulo2">
@@ -53,12 +54,15 @@
                 required></textarea>
       <div id="errorPhishing2" class="error"></div>
 
-      <button type="button" onclick="avaliarModulo2()">Enviar e Ver Resultado</button>
+      <button type="button" id="btnEnviar2" onclick="avaliarModulo2()">Enviar e Ver Resultado</button>
     </form>
 
     <!-- Exibição de nota e ranking -->
     <div id="resultadoModulo2"></div>
     <div id="rankingModulo2"></div>
+
+    <!-- Botão Voltar ao Menu -->
+    <a href="index.html" class="button" style="margin-top:1rem;">↩️ Voltar ao Menu</a>
   </div>
 
   <script>
@@ -86,11 +90,14 @@
       return isIPv4(ip) || isIPv6(ip);
     }
 
-    // Array local para ranking (somente sessão atual, até 10)
+    // Ranking local da sessão (até 10)
     var rankingLocal2 = [];
 
     function avaliarModulo2() {
-      // Limpar erros anteriores
+      // Desabilita o botão para impedir nova tentativa
+      document.getElementById('btnEnviar2').disabled = true;
+
+      // Limpa erros anteriores
       document.getElementById('errorUser2').textContent = '';
       document.getElementById('errorIpNorm2').textContent = '';
       document.getElementById('errorIpVpn2').textContent = '';
@@ -195,7 +202,7 @@
 
       // --- ENVIO AO BACKEND (Apps Script) ---
       var URL_DO_WEB_APP =
-        "https://script.google.com/macros/s/AKfycbxVU54KiTjv_QE2teSiZ_zGpvNmE2QXfUMsJoNSJRj5Nx4BiExiFx6BEEf0lkpmNhv5/exec";
+        "https://script.google.com/macros/s/AKfycbz8EzKpLCoQaJYScfwJZyRFGecWTiREkHI8RXypl4IDG2lc46TVowZwq_-0qzPmvpSAeA/exec";
 
       var payload2 = {
         modulo: 'Módulo 2',

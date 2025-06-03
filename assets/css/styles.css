@@ -117,16 +117,6 @@ button:hover {
   margin-top: 1.5rem;
 }
 
-/* === Dicas (Módulo 1) === */
-.terminal .dicas {
-  background-color: #003300;
-  padding: 0.8rem;
-  margin-top: 1.5rem;
-  font-style: italic;
-  border-radius: 4px;
-  border: 1px solid var(--accent-green);
-}
-
 /* === Módulo 2 – Dark Punk (Mesma paleta) === */
 .module2-body {
   background-color: var(--bg-container);
@@ -171,18 +161,18 @@ button:hover {
   border-radius: 6px;
   margin-top: 1.5rem;
 }
-#resultado, #ranking {
+#resultadoModulo2, #rankingModulo2 {
   margin-top: 1.5rem;
   background-color: var(--bg-ranking);
   padding: 1rem;
   border-left: 4px solid var(--accent-light);
   border-radius: 4px;
 }
-#ranking ul {
+#rankingModulo2 ul {
   list-style: none;
   padding-left: 0;
 }
-#ranking li {
+#rankingModulo2 li {
   margin-bottom: 0.5rem;
 }
 

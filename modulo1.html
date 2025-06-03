@@ -18,13 +18,14 @@
 
     Descubra IPs e hashes no CMD e identifique sinais de phishing.
     Cada passo vale pontos (1–10), com correção automática imediata.
+    NOVA TENTATIVA NÃO É PERMITIDA.
 
     Use as dicas abaixo para executar comandos no Windows CMD.
       </pre>
 
       <form id="formModulo1">
         <!-- 1) Número de Identificação -->
-        <label for="userId">1. Identifique-se (número de chamada 1–50):</label>
+        <label for="userId">1. Identifique-se (nº de chamada 1–50):</label>
         <input type="number" id="userId" name="userId" min="1" max="50" required />
         <div id="errorUserId" class="error"></div>
 
@@ -61,10 +62,13 @@
                   required></textarea>
         <div id="errorPhishing" class="error"></div>
 
-        <button type="button" onclick="avaliarModulo1()">Enviar e Ver Nota</button>
+        <button type="button" id="btnEnviar1" onclick="avaliarModulo1()">Enviar e Ver Nota</button>
       </form>
 
       <div id="resultadoModulo1" style="margin-top:1.5rem;"></div>
+
+      <!-- Botão Voltar ao Menu -->
+      <a href="index.html" class="button" style="margin-top:1rem;">↩️ Voltar ao Menu</a>
     </div>
   </div>
 
@@ -94,6 +98,9 @@
     }
 
     function avaliarModulo1() {
+      // Desabilita o botão para impedir nova tentativa
+      document.getElementById('btnEnviar1').disabled = true;
+
       // Limpa erros anteriores
       document.getElementById('errorUserId').textContent = '';
       document.getElementById('errorIpNormal').textContent = '';
@@ -183,7 +190,7 @@
 
       // --- ENVIO AO BACKEND (Apps Script) ---
       var URL_DO_WEB_APP =
-        "https://script.google.com/macros/s/AKfycbxVU54KiTjv_QE2teSiZ_zGpvNmE2QXfUMsJoNSJRj5Nx4BiExiFx6BEEf0lkpmNhv5/exec";
+        "https://script.google.com/macros/s/AKfycbz8EzKpLCoQaJYScfwJZyRFGecWTiREkHI8RXypl4IDG2lc46TVowZwq_-0qzPmvpSAeA/exec";
 
       var payload = {
         modulo: 'Módulo 1',
