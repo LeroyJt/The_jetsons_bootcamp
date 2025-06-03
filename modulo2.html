@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>THE_JETSONS_BOOTCAMP – Módulo 2</title>
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 <body class="module2-body">
   <div class="module2-container">
@@ -79,7 +79,7 @@
       return true;
     }
 
-    // Validação IPv6 (8 grupos hex de 1–4 dígitos separados por ":")
+    // Validação IPv6 (8 grupos hexadecimais de 1–4 dígitos separados por ":")
     function isIPv6(ip) {
       var regexIPv6 = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
       return regexIPv6.test(ip);
@@ -218,11 +218,11 @@
 
       fetch(URL_DO_WEB_APP, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload2)
-      }).catch(function() {
-        // Ignora erro de CORS, se ocorrer
+      }).then(function() {
+        console.log('Envio Módulo 2 realizado.');
+      }).catch(function(err) {
+        console.error('Erro no envio Módulo 2:', err);
       });
     }
   </script>
