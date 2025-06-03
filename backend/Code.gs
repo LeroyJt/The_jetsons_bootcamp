@@ -1,3 +1,4 @@
+function myFunction() {
 /**
  * Apps Script para gravar respostas únicas por aluno (userId)
  * na aba "Respostas" da planilha especificada.
