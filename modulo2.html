@@ -10,9 +10,8 @@
   <div class="module2-container">
     <h1>Módulo 2 – Privacidade e Rastreamento</h1>
     <p style="text-align:center; color: var(--accent-light); margin-bottom:1rem;">
-      Avalie IPs (IPv4 ou IPv6), hash e cite sinais de phishing.<br>
-      Cada passo vale pontos (1–10). Ranking local e envio ao backend.<br>
-      NOVA TENTATIVA NÃO É PERMITIDA.
+      Avalie IPs (IPv4 ou IPv6), hash e cite sinais de phishing.
+      Cada passo vale pontos (1–10). Ranking local e envio ao backend.
     </p>
 
     <form id="formModulo2">
@@ -54,15 +53,12 @@
                 required></textarea>
       <div id="errorPhishing2" class="error"></div>
 
-      <button type="button" id="btnEnviar2" onclick="avaliarModulo2()">Enviar e Ver Resultado</button>
+      <button type="button" onclick="avaliarModulo2()">Enviar e Ver Resultado</button>
     </form>
 
     <!-- Exibição de nota e ranking -->
     <div id="resultadoModulo2"></div>
     <div id="rankingModulo2"></div>
-
-    <!-- Botão Voltar ao Menu -->
-    <a href="index.html" class="button" style="margin-top:1rem;">↩️ Voltar ao Menu</a>
   </div>
 
   <script>
@@ -79,7 +75,7 @@
       return true;
     }
 
-    // Validação IPv6 (8 grupos hexadecimais de 1–4 dígitos separados por ":")
+    // Validação IPv6 (8 grupos hex de 1–4 dígitos separados por ":")
     function isIPv6(ip) {
       var regexIPv6 = /^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/;
       return regexIPv6.test(ip);
@@ -90,14 +86,11 @@
       return isIPv4(ip) || isIPv6(ip);
     }
 
-    // Ranking local da sessão (até 10)
+    // Array local para ranking (somente sessão atual, até 10)
     var rankingLocal2 = [];
 
     function avaliarModulo2() {
-      // Desabilita o botão para impedir nova tentativa
-      document.getElementById('btnEnviar2').disabled = true;
-
-      // Limpa erros anteriores
+      // Limpar erros anteriores
       document.getElementById('errorUser2').textContent = '';
       document.getElementById('errorIpNorm2').textContent = '';
       document.getElementById('errorIpVpn2').textContent = '';
@@ -202,7 +195,7 @@
 
       // --- ENVIO AO BACKEND (Apps Script) ---
       var URL_DO_WEB_APP =
-        "https://script.google.com/macros/s/AKfycbz8EzKpLCoQaJYScfwJZyRFGecWTiREkHI8RXypl4IDG2lc46TVowZwq_-0qzPmvpSAeA/exec";
+        "https://script.google.com/macros/s/AKfycbxVU54KiTjv_QE2teSiZ_zGpvNmE2QXfUMsJoNSJRj5Nx4BiExiFx6BEEf0lkpmNhv5/exec";
 
       var payload2 = {
         modulo: 'Módulo 2',
@@ -218,13 +211,14 @@
 
       fetch(URL_DO_WEB_APP, {
         method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload2)
-      }).then(function() {
-        console.log('Envio Módulo 2 realizado.');
-      }).catch(function(err) {
-        console.error('Erro no envio Módulo 2:', err);
+      }).catch(function() {
+        // Ignora erro de CORS, se ocorrer
       });
     }
   </script>
 </body>
 </html>
+
