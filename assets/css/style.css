@@ -117,6 +117,16 @@ button:hover {
   margin-top: 1.5rem;
 }
 
+/* === Dicas (Módulo 1) === */
+.terminal .dicas {
+  background-color: #003300;
+  padding: 0.8rem;
+  margin-top: 1.5rem;
+  font-style: italic;
+  border-radius: 4px;
+  border: 1px solid var(--accent-green);
+}
+
 /* === Módulo 2 – Dark Punk (Mesma paleta) === */
 .module2-body {
   background-color: var(--bg-container);
