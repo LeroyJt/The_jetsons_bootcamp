@@ -1,61 +1,62 @@
-function myFunction() {
 /**
- * Apps Script para gravar respostas únicas por aluno (userId)
- * na aba "Respostas" da planilha especificada.
+ * Código do Google Apps Script para receber POST de módulos e gravar
+ * cada submissão em uma planilha Google Sheets na aba "Respostas".
+ * Já está inserido o seu SHEET_ID.
  */
-
-const PLANILHA_ID = '1c3mdhARKEPKWrHghEvIh8ozKZVHaUJQIahrW8aEX6ss';
-const NOME_ABA = 'Respostas';
-
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
-    const planilha = SpreadsheetApp.openById(PLANILHA_ID);
-    const aba = planilha.getSheetByName(NOME_ABA);
-    if (!aba) throw new Error('Aba "Respostas" não encontrada.');
+    // Interpreta o corpo da requisição como JSON
+    var data = JSON.parse(e.postData.contents);
 
-    const ultimaLinha = aba.getLastRow();
-    const colUserIds = ultimaLinha > 1
-      ? aba.getRange(2, 2, ultimaLinha - 1).getValues().flat()
-      : [];
+    // ID da sua planilha (já inserido)
+    var SHEET_ID = "1wcNifnoergqUF7cC7aukxyQIyQTvyUixiiQb0l66sxM";
+    var ss = SpreadsheetApp.openById(SHEET_ID);
 
-    if (colUserIds.includes(data.userId)) {
-      return _jsonResponse({
-        sucesso: false,
-        mensagem: "Você já respondeu. Só é permitido 1 envio por aluno."
-      });
+    // Se não existir aba "Respostas", cria e adiciona cabeçalho
+    var sheet = ss.getSheetByName("Respostas");
+    if (!sheet) {
+      sheet = ss.insertSheet("Respostas");
+      sheet.appendRow([
+        "Timestamp",
+        "Módulo",
+        "UserID",
+        "IP Sem VPN",
+        "IP com VPN",
+        "IP via Tor",
+        "Hash SHA256",
+        "Phishing",
+        "Nota",
+        "Observações"
+      ]);
     }
 
-    const novaLinha = [
+    // Monta os valores a serem gravados em cada coluna
+    var linha = [
       data.timestamp || new Date().toISOString(),
-      data.userId || "",
-      data.modulo || "",
-      "", // ipNormal (não usado)
-      "", // ipVpn (não usado)
-      "", // ipTor (não usado)
-      data.hash || "", // resposta do aluno
-      "", // phishing (não usado)
-      ""  // nota (não usado)
+      data.modulo      || "",
+      data.userId      || "",
+      data.ipNormal    || "",
+      data.ipVpn       || "",
+      data.ipTor       || "",
+      data.hash        || "",
+      data.phishing    || "",
+      (data.nota != null ? data.nota : ""),
+      "" // coluna para observações futuras
     ];
+    sheet.appendRow(linha);
 
-    aba.appendRow(novaLinha);
-
-    return _jsonResponse({
-      sucesso: true,
-      mensagem: "Resposta enviada com sucesso!"
-    });
+    // Retorna resposta mínima para o fetch() do front-end
+    return ContentService
+      .createTextOutput(
+        JSON.stringify({ status: "OK" })
+      )
+      .setMimeType(ContentService.MimeType.JSON);
 
   } catch (err) {
-    return _jsonResponse({
-      sucesso: false,
-      mensagem: "Erro no servidor: " + err.message
-    });
+    return ContentService
+      .createTextOutput(
+        JSON.stringify({ status: "ERROR", message: err.toString() })
+      )
+      .setMimeType(ContentService.MimeType.JSON);
   }
-}
-
-// Gera resposta JSON com CORS liberado
-function _jsonResponse(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
 }
