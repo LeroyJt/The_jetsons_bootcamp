@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>THE_JETSONS_BOOTCAMP – Ranking Geral</title>
+  <title>THE_JETSONS_BOOTCAMP – Ranking Público</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -11,15 +11,12 @@
     <h1>Ranking Público Geral</h1>
     <p>Todas as submissões de todos os módulos, ordenadas por nota (decrescente).</p>
     <div id="tabelaRanking" style="margin-top:1rem;"></div>
-
-    <!-- Botão Voltar ao Menu -->
-    <a href="index.html" class="button" style="margin-top:1rem;">↩️ Voltar ao Menu</a>
   </div>
 
   <script>
-    // Link CSV público da aba "Respostas" da sua planilha (publicar a aba como CSV)
+    // Link CSV público da aba "Respostas" da sua planilha
     var URL_CSV =
-      "https://docs.google.com/spreadsheets/d/1c3mdhARKEPKWrHghEvIh8ozKZVHaUJQIahrW8aEX6ss/pub?output=csv";
+      "https://docs.google.com/spreadsheets/d/1wcNifnoergqUF7cC7aukxyQIyQTvyUixiiQb0l66sxM/pub?output=csv";
 
     // Converte CSV em array de objetos
     async function fetchRanking() {
@@ -73,3 +70,4 @@
   </script>
 </body>
 </html>
+
